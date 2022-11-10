@@ -1,0 +1,21 @@
+- name: Hello world
+  hosts: all
+  gather_facts: no
+  become: yes
+  
+  tasks:
+    
+    - name: update api from git
+      git:
+        repo: https://github.com/nvizero/laravel_api
+        dest: /home/nvizero/lyra/laravel_api
+        update: yes
+        force: yes
+        version: main
+    - name: update next js from git
+      git:
+        repo: https://github.com/nvizero/frontend
+        dest: /home/nvizero/lyra/frontend
+        update: yes
+        force: yes
+        version: main        
