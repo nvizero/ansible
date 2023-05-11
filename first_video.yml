@@ -9,7 +9,7 @@
     default_container_command1: /usr/bin/php /var/www/bin/hyperf.php migrate:rollback
     default_container_command2: /usr/bin/php /var/www/bin/hyperf.php migrate
     default_container_command3: /usr/bin/php /var/www/bin/hyperf.php seed:run
-    pm2_command3: pm2 restart 0
+    pm2_command3: pm2 restart 8
   
   tasks:    
     - name: update backend from git
@@ -20,10 +20,5 @@
         force: yes
         version: develop
 
-    - name: Create default containers
-      community.docker.docker_container:
-        name: "{{ default_container_name }}"
-        image: "{{ default_container_image }}"
-        command: "{{ default_container_command1 }}"                
-        state: present
-      with_sequence: count={{ container_count }}        
+    - name: Start/reload server 
+      command: "{{ pm2_command3 }}"                
