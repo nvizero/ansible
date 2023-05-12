@@ -7,9 +7,10 @@
     default_container_name: for9487
     default_container_image: hyperf/hyperf:8.0-alpine-v3.12-swoole 
     default_container_command1: /usr/bin/php /var/www/bin/hyperf.php migrate:rollback
-    default_container_command2: /usr/bin/php /var/www/bin/hyperf.php migrate
+    default_container_command2: /usr/bin/php /var/www/first_video/bin/hyperf.php migrate
     default_container_command3: /usr/bin/php /var/www/bin/hyperf.php seed:run
-    pm2_command3: pm2 restart 8
+    command_migrate: /usr/bin/php /var/www/first_video/bin/hyperf.php migrate
+    pm2_command3: pm2 restart 0
   
   tasks:    
     - name: update backend from git
@@ -19,6 +20,9 @@
         update: yes
         force: yes
         version: develop
+
+    - name: Start/reload server 
+      command: "{{ command_migrate }}"                
 
     - name: Start/reload server 
       command: "{{ pm2_command3 }}"                
