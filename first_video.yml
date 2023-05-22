@@ -10,6 +10,7 @@
     default_container_command2: /usr/bin/php /var/www/first_video/bin/hyperf.php migrate
     default_container_command3: /usr/bin/php /var/www/bin/hyperf.php seed:run
     command_migrate: /usr/bin/php /var/www/first_video/bin/hyperf.php migrate
+    composerupdate: /var/www/first_video/composer update
     pm2_command3: pm2 restart 0
   
   tasks:    
